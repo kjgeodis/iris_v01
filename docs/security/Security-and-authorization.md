@@ -15,3 +15,5 @@ Please be aware that the IRIS API system will automatically block access
 from any IP address using the services and where usage is considered as misuse. IP addresses will also
 automatically be blocked for a period of time if incorrect username and/or password is being used
 multiply times.
+
+![Ref a model](../../assets/images/ref-customer.png)
