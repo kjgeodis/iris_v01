@@ -5,9 +5,10 @@
     "version": "1.0",
     "contact": {
       "name": "GEODIS FF Global Integrations",
-      "email": "karl-johan.garvo@geodis.com"
+      "email": "karl-johan.garvo@geodis.com",
+      "url": "https://iris-ts2.ff.geodis.com/"
     },
-    "termsOfService": "Terms go here",
+    "termsOfService": "The IRIS API is intended only for clients of GEODIS and access to the services offered through the API need to be approved and activated by GEODIS before they can be utilized.",
     "description": "IRIS API v1 Milestones\n\nOPERATIONS\n- MilestoneRequestExt()"
   },
   "host": "iris-ts2.ff.geodis.com",
@@ -24,8 +25,184 @@
     "application/soap+xml",
     "application/x-www-form-urlencoded"
   ],
-  "paths": {},
-  "definitions": {},
+  "paths": {
+    "/MilestoneRequestExt": {
+      "post": {
+        "summary": "",
+        "operationId": "milestonerequestext",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "description": "Update milestones on shipments via the IRIS API. When a milestone is added via this API, the milestone is added to the shipment in NextGen.\n\nUse the Estimated segment to indicate this is an estimate date, otherwise its assumed Actual.\n\nNOTE: Only one milestone event is allowed in each request (see addmilestoneext.xsd for reference).",
+        "tags": [
+          "Milestones",
+          "IRIS",
+          "MilestoneRequest",
+          "Ext"
+        ]
+      },
+      "parameters": []
+    }
+  },
+  "definitions": {
+    "AddMilestoneRequestext.RequestDetails": {
+      "type": "object",
+      "required": [
+        "XMLVersion",
+        "Timestamp",
+        "Test",
+        "Username",
+        "GlobalId",
+        "Password",
+        "DeviceName",
+        "Shipment"
+      ],
+      "properties": {
+        "XMLVersion": {
+          "type": "string"
+        },
+        "Timestamp": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "Test": {
+          "type": "string"
+        },
+        "Username": {
+          "type": "string"
+        },
+        "GlobalId": {
+          "type": "string"
+        },
+        "Password": {
+          "type": "string"
+        },
+        "DeviceName": {
+          "type": "string"
+        },
+        "Shipment": {
+          "type": "string"
+        },
+        "MasterBillNo": {
+          "type": "string"
+        },
+        "ConsolNo": {
+          "type": "string"
+        }
+      },
+      "title": "",
+      "description": "Request Details"
+    },
+    "AddMilestoneRequestext.Milestones.Event.Gps": {
+      "type": "object",
+      "required": [
+        "Longitude",
+        "Latitude"
+      ],
+      "properties": {
+        "Longitude": {
+          "type": "number"
+        },
+        "Latitude": {
+          "type": "number"
+        }
+      },
+      "description": "GPS",
+      "title": ""
+    },
+    "AddMilestoneRequestext.Milestones.Event": {
+      "type": "object",
+      "required": [
+        "EventType",
+        "EventReference",
+        "Created",
+        "Amount"
+      ],
+      "properties": {
+        "EventType": {
+          "type": "string"
+        },
+        "EventReference": {
+          "type": "string"
+        },
+        "Estimate": {
+          "type": "string"
+        },
+        "Created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "Amount": {
+          "type": "integer"
+        },
+        "Gps": {
+          "$ref": "#/definitions/AddMilestoneRequestext.Milestones.Event.Gps"
+        },
+        "Image": {
+          "type": "string"
+        },
+        "Text": {
+          "type": "string"
+        },
+        "Signature": {
+          "type": "string"
+        },
+        "DeviationType": {
+          "type": "string"
+        },
+        "DeviationReason": {
+          "type": "string"
+        },
+        "DeviationText": {
+          "type": "string"
+        },
+        "VesselName": {
+          "type": "string"
+        },
+        "VoyageNumber": {
+          "type": "string"
+        },
+        "TransportMode": {
+          "type": "string"
+        }
+      },
+      "description": "Event"
+    },
+    "AddMilestoneRequestext.Milestones": {
+      "type": "object",
+      "required": [
+        "Event"
+      ],
+      "properties": {
+        "Event": {
+          "$ref": "#/definitions/AddMilestoneRequestext.Milestones.Event"
+        }
+      },
+      "description": "Milestones"
+    },
+    "AddMilestoneRequest Model": {
+      "type": "object",
+      "description": "Add Milestone Request Ext Schema Definition",
+      "x-examples": {
+        "example-1": {}
+      },
+      "title": "",
+      "properties": {
+        "RequestDetails": {
+          "$ref": "#/definitions/AddMilestoneRequestext.RequestDetails"
+        },
+        "Milestones": {
+          "$ref": "#/definitions/AddMilestoneRequestext.Milestones"
+        }
+      },
+      "required": [
+        "RequestDetails",
+        "Milestones"
+      ]
+    }
+  },
   "securityDefinitions": {
     "username": {
       "type": "basic"
@@ -37,5 +214,16 @@
       "type": "basic"
     }
   },
-  "basePath": "/api/milestones.asmx"
+  "basePath": "/api/milestones.asmx",
+  "security": [
+    {
+      "username": []
+    },
+    {
+      "password": []
+    },
+    {
+      "globalid": []
+    }
+  ]
 }
