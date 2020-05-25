@@ -1,0 +1,41 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "IRIS_Milestones_V01",
+    "version": "1.0",
+    "contact": {
+      "name": "GEODIS FF Global Integrations",
+      "email": "karl-johan.garvo@geodis.com"
+    },
+    "termsOfService": "Terms go here",
+    "description": "IRIS v 01 Milestones API"
+  },
+  "host": "iris-ts2.ff.geodis.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json",
+    "application/x-www-form-urlencoded",
+    "application/soap+xml"
+  ],
+  "consumes": [
+    "application/json",
+    "application/soap+xml",
+    "application/x-www-form-urlencoded"
+  ],
+  "paths": {},
+  "definitions": {},
+  "securityDefinitions": {
+    "username": {
+      "type": "basic"
+    },
+    "password": {
+      "type": "basic"
+    },
+    "globalid": {
+      "type": "basic"
+    }
+  },
+  "basePath": "/api/milestones.asmx"
+}
